@@ -5,53 +5,62 @@ import "./Sudoku.css"
 const SudokuComponent = () => {
 
 
-  const [sudokuBoard, setSudokuBoard] = useState(null);
+  const [sudokuBoard, setSudokuBoard] = useState(null)
   const [fullBoard, setFullBoard] = useState(false)
-
+  const solved = solvepuzzle(sudokuBoard)
 
   useEffect(() => {
-    const newBoard = makepuzzle();
-    setSudokuBoard(newBoard);
+    const newBoard = makepuzzle()
+    setSudokuBoard(newBoard)
   }, []);
 
   const changeHandler = (e, index) => {
-    console.log(e)
-    console.log(index)
     const newBoard = sudokuBoard
     newBoard[index] = e.target.valueAsNumber
     setSudokuBoard(newBoard)
-    console.log(sudokuBoard)
     if (sudokuBoard && !sudokuBoard.some(cell => cell === null)) { setFullBoard(true) }
   }
 
-  const solved = solvepuzzle(sudokuBoard);
-
-
   const clickHandler = () => {
-    console.log("solution:", solved)
-    console.log("attempt", sudokuBoard)
-    let test = "test"
+    let solution = ""
+    const solutionGrid = (arr) => {
+      let string = ""
+      for (const i in arr) {
+        string += `<p>${arr[i]}</p>`
+      }
+      return string
+    }
+
     if (sudokuBoard.every((value, index) => value === solved[index])) { alert("You won!") }
     else {
-      if (confirm("That wasn't right. See solution?")) { test = solved }
+      if (confirm("That wasn't right. See solution?")) { solution = solved }
     }
-    document.getElementById("test").innerHTML = test;
+    document.getElementById("solution-grid").innerHTML = solutionGrid(solution);
   }
-  console.log("global solution:", solved)
+
+  const resetGame = () => {
+    const newBoard = makepuzzle()
+    setSudokuBoard(newBoard)
+    const inputElements = document.querySelectorAll('input[type="number"]');
+    inputElements.forEach((input) => {
+      input.value = '';
+    })
+  }
 
   return (
     <>
+      <button onClick={resetGame}>Start Again</button>
       <div className="sudoku-board">
         {sudokuBoard &&
           sudokuBoard.map((cell, index) => (
             <button key={index} className="sudoku-cell">
               {cell !== null ? cell :
-                <input type="number" max="9" min="0" onChange={(e) => changeHandler(e, index)}></input>}
+                <input type="number" max="9" min="0" onChange={(e) => changeHandler(e, index)} />}
             </button>
           ))}
       </div>
       <button className={fullBoard ? "visible" : "visible"} onClick={clickHandler}>Check Answer</button>
-      <p id="test" className="solution"></p>
+      <div id="solution-grid" className="solution"></div>
     </>
   )
 }
