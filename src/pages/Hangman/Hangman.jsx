@@ -6,6 +6,7 @@ const Hangman = () => {
   const [clue, setClue] = useState("")
   const [randomWord, setRandomWord] = useState("")
   const [lives, setLives] = useState(5)
+  const [usedLetters, setUsedLetters] = useState("")
 
   const initGame = () => {
     const random = words[Math.round(Math.random() * words.length)]
@@ -38,6 +39,7 @@ const Hangman = () => {
       if (lives == 0) { alert("Sorry! You lost.") }
       else {
         alert("That letter doesn't exist")
+        setUsedLetters([...usedLetters, `${e.target.elements[0].value} `])
       }
     }
     e.target.elements[0].value = ""
@@ -50,12 +52,13 @@ const Hangman = () => {
   return (
     <>
       <button onClick={initGame}>Start</button>
-      <p>{randomWord}</p>
+      {/* <p>{randomWord}</p> */}
       <p>{clue}</p>
       <form onSubmit={checkLetter}>
         <input placeholder="Add a letter" />
         <button type="submit">Go</button>
       </form>
+      <p><s>{usedLetters}</s></p>
       <p>{(lives >= 0) ? `Lives remaining: ${lives}` : "You lose"}</p>
     </>
   )
