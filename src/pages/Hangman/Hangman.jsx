@@ -10,25 +10,24 @@ const Hangman = () => {
   const initGame = () => {
     const random = words[Math.round(Math.random() * words.length)]
     setRandomWord(random)
-    setClue(random.split("").map(i => "_")
-      // .join(" ").trim()
+    setClue(random.split("").map(i => "_").join(" ").trim()
     )
   }
 
   const checkLetter = (e) => {
     e.preventDefault()
     const findAndReplaceLetters = (letter, word, prevClue) => {
+      const trimmedClue = prevClue.replace(/\s/g, '')
       const newClue = []
       for (let i = 0; i < word.length; i++) {
         if (word[i] === letter) {
           newClue.push(word[i])
-        } else if (prevClue[i] !== "_") {
-          newClue.push(prevClue[i])
+        } else if (trimmedClue[i] !== "_") {
+          newClue.push(trimmedClue[i])
         } else { newClue.push("_") }
 
       }
-      return newClue
-      // .join(" ").trim()
+      return newClue.join(" ").trim()
     }
 
     if (randomWord.includes(e.target.elements[0].value)) {
@@ -51,7 +50,7 @@ const Hangman = () => {
   return (
     <>
       <button onClick={initGame}>Start</button>
-      {/* <p>{randomWord}</p> */}
+      <p>{randomWord}</p>
       <p>{clue}</p>
       <form onSubmit={checkLetter}>
         <input placeholder="Add a letter" />
