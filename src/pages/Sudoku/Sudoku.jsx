@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { makepuzzle, solvepuzzle } from "sudoku";
 import "./Sudoku.css"
 
-const SudokuComponent = () => {
+const SudokuComponent = ({ sudokuBoard, setSudokuBoard, fullBoard, setFullBoard, sudoWon, setSudoWon, sudoLost, setSudoLost }) => {
 
-
-  const [sudokuBoard, setSudokuBoard] = useState(null)
-  const [fullBoard, setFullBoard] = useState(false)
   const solved = solvepuzzle(sudokuBoard)
+
+  console.log(solved)
 
   useEffect(() => {
     const newBoard = makepuzzle()
@@ -31,9 +30,15 @@ const SudokuComponent = () => {
       return string
     }
 
-    if (sudokuBoard.every((value, index) => value === solved[index])) { alert("You won!") }
+    if (sudokuBoard.every((value, index) => value === solved[index])) {
+      alert("You won!")
+      setSudoWon(sudoWon + 1)
+    }
     else {
-      if (confirm("That wasn't right. See solution?")) { solution = solved }
+      if (confirm("That wasn't right. See solution?")) {
+        solution = solved
+        setSudoLost(sudoLost + 1)
+      }
     }
     document.getElementById("solution-grid").innerHTML = solutionGrid(solution);
   }

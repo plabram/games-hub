@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-const TicTacToe = () => {
+const TicTacToe = ({ tiles, setTiles, isStarted, setIsStarted, turn, setTurn, ticWon, setTicWon, ticLost, setTicLost }) => {
 
-  const [tiles, setTiles] = useState([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ])
-
-  const [isStarted, setIsStarted] = useState(false)
-  const [turn, setTurn] = useState("X")
 
   const play = (a, b, player) => {
     const tempTiles = [...tiles]
@@ -45,8 +37,14 @@ const TicTacToe = () => {
         return true
       else return false
     }
-    if (finishGame("X")) { alert("You win") }
-    if (finishGame("O")) { alert("The computer wins") }
+    if (finishGame("X")) {
+      alert("You win")
+      setTicWon(ticWon + 1)
+    }
+    if (finishGame("O")) {
+      alert("The computer wins")
+      setTicLost(ticLost + 1)
+    }
     if (!finishGame("X") && !finishGame("O") && noNullTiles) { alert("It's a draw") }
   }, [tiles])
 

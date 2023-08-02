@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-const Hangman = () => {
+const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, usedLetters, setUsedLetters, hangWon, setHangWon, hangLost, setHangLost }) => {
 
   const words = ["diplomatic", "health", "thaw", "victory", "casualty", "union", "year", "pension", "assumption", "texture"]
-  const [clue, setClue] = useState("")
-  const [randomWord, setRandomWord] = useState("")
-  const [lives, setLives] = useState(5)
-  const [usedLetters, setUsedLetters] = useState("")
 
   const initGame = () => {
     const random = words[Math.round(Math.random() * words.length)]
@@ -36,7 +32,10 @@ const Hangman = () => {
       setClue(nextClue)
     } else {
       setLives(lives - 1)
-      if (lives == 0) { alert("Sorry! You lost.") }
+      if (lives == 0) {
+        alert("Sorry! You lost.")
+        setHangLost(hangLost + 1)
+      }
       else {
         alert("That letter doesn't exist")
         setUsedLetters([...usedLetters, `${e.target.elements[0].value} `])
@@ -46,7 +45,10 @@ const Hangman = () => {
   }
 
   useEffect(() => {
-    if (!clue.includes("_") && (clue !== "")) { alert("You won!") }
+    if (!clue.includes("_") && (clue !== "")) {
+      alert("You won!")
+      setHangWon(hangWon + 1)
+    }
   }, [clue])
 
   return (
