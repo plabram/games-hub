@@ -6,7 +6,7 @@ import { FreeLayout } from "../src/layouts/FreeLayout"
 
 // const Home = lazy(() => import('./pages/Home/Home'))
 import { Login } from "../src/pages/Login"
-import { Register } from "../src/pages/Register"
+// import { Register } from "../src/pages/Register"
 const TicTacToe = lazy(() => import('./pages/TicTacToe/TicTacToe'))
 const Hangman = lazy(() => import('./pages/Hangman/Hangman'))
 const Sudoku = lazy(() => import('./pages/Sudoku/Sudoku'))
@@ -46,27 +46,14 @@ function App() {
 
   return (
     <>
-      {/* <header>
-        <h1>Games Hub</h1>
-        <nav>
-          <Link to="/">Dashboard</Link>
-          <Link to="/tictactoe">TicTacToe</Link>
-          <Link to="/hangman">Hangman</Link>
-          <Link to="/sudoku">Sudoku</Link>
-        </nav>
-      </header> */}
       <Routes>
         <Route element={<FreeLayout />}>
-          <Route path="/" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}>
-              {/* <Home ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost} /> */}
-            </React.Suspense>
-          } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login />} />
+          {/* <Route path="/register" element={<Register />} /> */}
         </Route>
 
-        <Route path="/dashboard" element={<ProtectedLayout />}>
+        {/* //remove test */}
+        <Route path="/" element={<ProtectedLayout />}>
           <Route path="dashboard" element={<Dashboard ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost} />} />
           <Route path="tictactoe" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
