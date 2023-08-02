@@ -9,9 +9,10 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate()
 
   const login = async (data) => {
-    setUser(data)
-    //remove test
-    navigate("/dashboard", { replace: true })
+    if (data.email === "test@test.com" && data.password === "Secure") {
+      setUser(data)
+      navigate("/dashboard", { replace: true })
+    } else { alert("That user doesn't exist") }
   }
 
   const logout = () => {
