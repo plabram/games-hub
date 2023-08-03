@@ -1,12 +1,16 @@
 import './App.css'
 import { Link, Routes, Route } from 'react-router-dom'
-import React, { lazy, useState } from 'react'
+import React, { lazy, useState, useEffect } from 'react'
+import { ProtectedLayout } from "../src/layouts/ProtectedLayout"
+import { FreeLayout } from "../src/layouts/FreeLayout"
 
-const Home = lazy(() => import('./pages/Home/Home'))
+// const Home = lazy(() => import('./pages/Home/Home'))
+import { Login } from "../src/pages/Login"
+// import { Register } from "../src/pages/Register"
 const TicTacToe = lazy(() => import('./pages/TicTacToe/TicTacToe'))
 const Hangman = lazy(() => import('./pages/Hangman/Hangman'))
 const Sudoku = lazy(() => import('./pages/Sudoku/Sudoku'))
-
+import Dashboard from "../src/pages/Profile"
 
 function App() {
 
@@ -16,7 +20,6 @@ function App() {
     [null, null, null],
     [null, null, null],
   ])
-  const [isStarted, setIsStarted] = useState(false)
   const [turn, setTurn] = useState("X")
 
   //Hangman States
@@ -38,44 +41,62 @@ function App() {
   const [sudoLost, setSudoLost] = useState(0)
 
 
+  //Persist states in local storage
+  // useEffect(() => {
+  //   setHangWon(JSON.parse(window.localStorage.getItem('hangWon')))
+  //   setHangLost(JSON.parse(window.localStorage.getItem('hangLost')))
+  //   setSudoWon(JSON.parse(window.localStorage.getItem('sudoWon')))
+  //   setSudoLost(JSON.parse(window.localStorage.getItem('sudoLost')))
+  //   setTicLost(JSON.parse(window.localStorage.getItem('ticLost')))
+  //   setTicWon(JSON.parse(window.localStorage.getItem('ticWon')))
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem('hangWon', hangWon)
+  //   window.localStorage.setItem('hangLost', hangLost)
+  //   window.localStorage.setItem('sudoWon', sudoWon)
+  //   window.localStorage.setItem('sudoLost', sudoLost)
+  //   window.localStorage.setItem('ticLost', ticLost)
+  //   window.localStorage.setItem('ticWon', ticWon)
+  // }, [
+  //   ticWon, ticLost, sudoWon, sudoLost, hangWon, hangLost
+
+  // ]);
+
+
   return (
     <>
-      <header>
-        <h1>Games Hub</h1>
-        <nav>
-          <Link to="/">Dashboard</Link>
-          <Link to="/tictactoe">TicTacToe</Link>
-          <Link to="/hangman">Hangman</Link>
-          <Link to="/sudoku">Sudoku</Link>
-        </nav>
-      </header>
       <Routes>
-        <Route path="/" element={
-          <React.Suspense fallback={<h2>Loading...</h2>}>
-            <Home ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost} />
-          </React.Suspense>
-        } />
-        <Route path="/tictactoe" element={
-          <React.Suspense fallback={<h2>Loading...</h2>}>
-            <TicTacToe tiles={tiles} setTiles={setTiles} isStarted={isStarted} setIsStarted={setIsStarted} turn={turn} setTurn={setTurn}
-              ticWon={ticWon} setTicWon={setTicWon} ticLost={ticLost} setTicLost={setTicLost}
-            />
-          </React.Suspense>
-        } />
-        <Route path="/Hangman" element={
-          <React.Suspense fallback={<h2>Loading...</h2>}>
-            <Hangman clue={clue} setClue={setClue} randomWord={randomWord} setRandomWord={setRandomWord} lives={lives} setLives={setLives} usedLetters={usedLetters} setUsedLetters={setUsedLetters}
-              hangWon={hangWon} setHangWon={setHangWon} hangLost={hangLost} setHangLost={setHangLost}
-            />
-          </React.Suspense>
-        } />
-        <Route path="/Sudoku" element={
-          <React.Suspense fallback={<h2>Loading...</h2>}>
-            <Sudoku sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard} fullBoard={fullBoard} setFullBoard={setFullBoard}
-              sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost}
-            />
-          </React.Suspense>
-        } />
+        <Route element={<FreeLayout />}>
+          <Route path="/" element={<Login />} />
+          {/* <Route path="/register" element={<Register />} /> */}
+        </Route>
+
+        {/* //remove test */}
+        <Route path="/" element={<ProtectedLayout />}>
+          <Route path="dashboard" element={<Dashboard ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost} />} />
+          <Route path="tictactoe" element={
+            <React.Suspense fallback={<h2>Loading...</h2>}>
+              <TicTacToe tiles={tiles} setTiles={setTiles} turn={turn} setTurn={setTurn}
+                ticWon={ticWon} setTicWon={setTicWon} ticLost={ticLost} setTicLost={setTicLost}
+              />
+            </React.Suspense>
+          } />
+          <Route path="hangman" element={
+            <React.Suspense fallback={<h2>Loading...</h2>}>
+              <Hangman clue={clue} setClue={setClue} randomWord={randomWord} setRandomWord={setRandomWord} lives={lives} setLives={setLives} usedLetters={usedLetters} setUsedLetters={setUsedLetters}
+                hangWon={hangWon} setHangWon={setHangWon} hangLost={hangLost} setHangLost={setHangLost}
+              />
+            </React.Suspense>
+          } />
+          <Route path="sudoku" element={
+            <React.Suspense fallback={<h2>Loading...</h2>}>
+              <Sudoku sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard} fullBoard={fullBoard} setFullBoard={setFullBoard}
+                sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost}
+              />
+            </React.Suspense>
+          } />
+        </Route>
       </Routes>
     </>
   )
