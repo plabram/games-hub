@@ -1,0 +1,27 @@
+.hangman-invisible > .hangman-game {
+  display: none;
+}
+
+.hangman-invisible > button {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.hangman-visible > .hangman-game {
+  display: block;
+}
+
+.hangman-visible > button {
+  background-color: var(--dark);
+  color: var(--light)
+}
+
+.clue {
+  margin-top: 40px;
+  font-size: 2rem;
+  padding: 0.4em 0.8em;
+}
+
+form > button {
+  margin: 5px;
+}

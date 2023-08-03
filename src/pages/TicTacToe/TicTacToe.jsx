@@ -13,7 +13,6 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
     ])
     const randomPlayer = Math.round(Math.random())
     setTurn(players[randomPlayer])
-    console.log(turn)
   }
 
   const play = (a, b, player) => {
@@ -29,8 +28,6 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
     else {
       const i = Math.floor(n / 3)
       const j = n % 3
-
-
       play(i, j, "O")
     }
   }
@@ -59,6 +56,7 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
 
   useEffect(() => {
 
+    console.log("render the board")
     const finishGame = (user) => {
       if (tiles[0][0] === user && tiles[0][1] === user && tiles[0][2] === user ||
         tiles[1][0] === user && tiles[1][1] === user && tiles[1][2] === user ||

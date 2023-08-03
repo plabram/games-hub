@@ -7,3 +7,12 @@
 header {
 font-family: 'Press Start 2P', cursive;
 }
+
+nav > button {
+  margin: 5px;
+  font-size: 1.4em;
+}
+
+.header-and-nav {
+  padding-bottom: 20px
+}

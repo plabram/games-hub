@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import "./Hangman.css"
 
-const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, usedLetters, setUsedLetters, hangWon, setHangWon, hangLost, setHangLost }) => {
+
+const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, usedLetters, setUsedLetters,
+  hangWon, setHangWon, hangLost, setHangLost, visible, setVisible }) => {
 
   const words = ["diplomatic", "health", "thaw", "victory", "casualty", "union", "year", "pension", "assumption", "texture"]
 
   const initGame = () => {
     const random = words[Math.round(Math.random() * words.length)]
     setRandomWord(random)
-    setClue(random.split("").map(i => "_").join(" ").trim()
-    )
+    setClue(random.split("").map(i => "_").join(" ").trim())
+    setVisible(true)
   }
 
   const checkLetter = (e) => {
@@ -52,17 +55,18 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
   }, [clue])
 
   return (
-    <>
-      <button onClick={initGame}>Start</button>
-      {/* <p>{randomWord}</p> */}
-      <p>{clue}</p>
-      <form onSubmit={checkLetter}>
-        <input placeholder="Add a letter" />
-        <button type="submit">Go</button>
-      </form>
-      <p><s>{usedLetters}</s></p>
-      <p>{(lives >= 0) ? `Lives remaining: ${lives}` : "You lose"}</p>
-    </>
+    <div className={visible ? "hangman-visible" : "hangman-invisible"}>
+      <button onClick={initGame}>{visible ? "Start Over" : "Start"}</button>
+      <div className="hangman-game">
+        <p>{(lives >= 0) ? `Lives remaining: ${lives}` : "You lose"}</p>
+        <p className="clue">{clue}</p>
+        <form onSubmit={checkLetter}>
+          <input placeholder="Type a letter" required />
+          <button type="submit">Try</button>
+        </form>
+        <p><s>{usedLetters}</s></p>
+      </div>
+    </div>
   )
 }
 

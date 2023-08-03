@@ -18,7 +18,7 @@ export const Login = () => {
 
   return (
     <div>
-      <h2>This is the login page</h2>
+      <h2>Log in to start</h2>
       <form onSubmit={handleSubmit} noValidate>
         <label htmlFor="email">
           <input type="email" name="email" id="email" required onChange={handleInput} />

@@ -1,6 +1,6 @@
 import { Navigate, useOutlet } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import AppBar from "../components/AppBar/AppBar"
+import { useAuth } from "../../hooks/useAuth";
+import "./FreeLayout.css"
 
 export const FreeLayout = () => {
   const { user } = useAuth()
@@ -10,13 +10,9 @@ export const FreeLayout = () => {
   if (user) return <Navigate to="/dashboard/" replace />
 
   return (
-    <>
+    <div className="free-header">
       <h1>The Games Hub</h1>
-      {/* <AppBar pages={
-        [{ label: "Login 🔐", path: "/login" }]
-      }
-      /> */}
       {outlet}
-    </>
+    </div>
   )
 }
