@@ -12,11 +12,18 @@ const AppBar = ({ pages }) => {
   }
   return (
     <div className="header-and-nav">
-      <div className="logout">{
-        !!user && (
-          <button key={logout} onClick={logout}>Logout 🚪</button>
-        )
-      }</div>
+      <div className="top-buttons">
+        <div className='dashboard'>
+          <button key={"Dashboard"} onClick={() => handleNavigate("dashboard")}>
+            {"Dashboard 📈"}
+          </button>
+        </div>
+        <div className="logout">{
+          !!user && (
+            <button key={logout} onClick={logout}>Logout 🚪</button>
+          )
+        }</div>
+      </div>
       <header>
         <h1>Games Hub</h1>
       </header>

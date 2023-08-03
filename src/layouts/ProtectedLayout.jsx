@@ -12,7 +12,7 @@ export const ProtectedLayout = () => {
     <>
       <AppBar pages={
         [
-          { label: "Dashboard", path: "dashboard" },
+          // { label: "Dashboard", path: "dashboard" },
           { label: "TicTacToe", path: "tictactoe" },
           { label: "Sudoku", path: "sudoku" },
           { label: "Hangman", path: "hangman" }

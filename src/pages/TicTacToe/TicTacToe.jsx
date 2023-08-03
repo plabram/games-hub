@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import "./TicTacToe.css"
 
-const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, turn, setTurn }) => {
+const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, turn, setTurn,
+  ticVisible, setTicVisible
+}) => {
 
   const players = ["X", "O"]
 
 
   const initGame = () => {
+    setTicVisible(true)
     setTiles([
       [null, null, null],
       [null, null, null],
@@ -88,21 +91,23 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
 
 
   return (
-    <>
-      <button onClick={initGame}>New Game</button>
-      <p>Player: {turn}</p>
-      <div>
-        {tiles.map((row, rowIndex) => (
-          <p key={rowIndex}>
-            {row.map((tile, columnIndex) => (
-              <button key={columnIndex} onClick={() => clickHandler(rowIndex, columnIndex)}>
-                {tile}
-              </button>
-            ))}
-          </p>
-        ))}
+    <div className={ticVisible ? "tictactoe-visible" : "tictactoe-invisible"}>
+      <div className='tictactoe-game'>
+        <p>Player: {turn}</p>
+        <div className="board">
+          {tiles.map((row, rowIndex) => (
+            <p key={rowIndex}>
+              {row.map((tile, columnIndex) => (
+                <button key={columnIndex} onClick={() => clickHandler(rowIndex, columnIndex)}>
+                  {tile}
+                </button>
+              ))}
+            </p>
+          ))}
+        </div>
       </div>
-    </>
+      <button onClick={initGame}>{ticVisible ? "Start Over" : "Start"}</button>
+    </div>
   )
 }
 

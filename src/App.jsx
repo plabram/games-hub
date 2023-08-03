@@ -39,6 +39,7 @@ function App() {
   const [hangLost, setHangLost] = useState(0)
   const [sudoWon, setSudoWon] = useState(0)
   const [sudoLost, setSudoLost] = useState(0)
+  const [ticVisible, setTicVisible] = useState(false)
 
   return (
     <>
@@ -57,6 +58,7 @@ function App() {
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <TicTacToe tiles={tiles} setTiles={setTiles} turn={turn} setTurn={setTurn}
                 ticWon={ticWon} setTicWon={setTicWon} ticLost={ticLost} setTicLost={setTicLost}
+                ticVisible={ticVisible} setTicVisible={setTicVisible}
               />
             </React.Suspense>
           } />

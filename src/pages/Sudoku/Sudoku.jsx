@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 import { makepuzzle, solvepuzzle } from "sudoku";
 import "./Sudoku.css"
 
@@ -31,7 +31,7 @@ const SudokuComponent = ({ sudokuBoard, setSudokuBoard, fullBoard, setFullBoard,
     const solutionGrid = (arr) => {
       let string = ""
       for (const i in arr) {
-        string += `<p>${arr[i]}</p>`
+        string += `<span>${arr[i]}</span>`
       }
       return string
     }

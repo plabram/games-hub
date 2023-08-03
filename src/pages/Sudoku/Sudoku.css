@@ -15,15 +15,24 @@
 
 .button-visible {
   display: inline;
+  margin-bottom: 10px;
 }
 
 .button-invisible {
-  display: none
+  display: inline;
+  margin-bottom: 10px;
 }
 
 .solution {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+  gap: 3px;
+  padding-bottom: 10px;
+}
+
+.solution > span {
+  padding: 0px;
+  margin: 0px
 }
 
 .sudoku-board {
