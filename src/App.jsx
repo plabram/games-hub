@@ -30,6 +30,7 @@ function App() {
   //Sudoku States
   const [sudokuBoard, setSudokuBoard] = useState(null)
   const [fullBoard, setFullBoard] = useState(false)
+  const [sudoVisible, setSudoVisible] = useState(false)
 
   //Wins and Losses
   const [ticWon, setTicWon] = useState(0)
@@ -69,7 +70,7 @@ function App() {
           <Route path="sudoku" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <Sudoku sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard} fullBoard={fullBoard} setFullBoard={setFullBoard}
-                sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost}
+                sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost} sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
               />
             </React.Suspense>
           } />

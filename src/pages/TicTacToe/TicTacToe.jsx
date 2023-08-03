@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import "./TicTacToe.css"
 
 const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, turn, setTurn }) => {
 

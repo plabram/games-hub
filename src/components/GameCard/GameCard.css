@@ -3,3 +3,7 @@
   width: 300px;
   border-radius: 5px;
 }
+
+.gamecard:hover {
+background-color: var(--light);
+}

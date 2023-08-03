@@ -1,19 +1,58 @@
-.sudoku-board {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 2px,
-  
+.sudo-invisible > .sudoku-game {
+  display: none;
 }
 
-.visible {
-  display: block
+.sudo-visible > .sudoku-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hidden {
+.sudo-invisible > button {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.button-visible {
+  display: inline;
+}
+
+.button-invisible {
   display: none
 }
 
 .solution {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+}
+
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 3px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.sudoku-board > button {
+  padding: 0px;
+  margin: 0px;
+}
+
+.sudo-visible > button {
+  background-color: var(--dark);
+  color: var(--light)
+}
+
+input {
+  background-color: var(--dark);
+  border: none;
+  font-size: 1em;
+  
+}
+
+input::-webkit-inner-spin-button {
+  display: none;
 }

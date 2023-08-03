@@ -56,7 +56,6 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
 
   return (
     <div className={visible ? "hangman-visible" : "hangman-invisible"}>
-      <button onClick={initGame}>{visible ? "Start Over" : "Start"}</button>
       <div className="hangman-game">
         <p>{(lives >= 0) ? `Lives remaining: ${lives}` : "You lose"}</p>
         <p className="clue">{clue}</p>
@@ -66,6 +65,7 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
         </form>
         <p><s>{usedLetters}</s></p>
       </div>
+      <button onClick={initGame}>{visible ? "Start Over" : "Start"}</button>
     </div>
   )
 }
