@@ -2,7 +2,7 @@ import React from 'react'
 import GameCard from '../components/GameCard';
 import { Navigate, useOutlet } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
-import AppBar from "../components/AppBar"
+import AppBar from "../components/AppBar/AppBar"
 
 const Dashboard = ({ ticWon, ticLost, hangWon, hangLost, sudoWon, sudoLost }) => {
   const { user } = useAuth()

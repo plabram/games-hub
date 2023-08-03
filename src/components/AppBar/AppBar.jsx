@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
+import "./AppBar.css"
 
 const AppBar = ({ pages }) => {
   const navigate = useNavigate()
@@ -10,7 +11,12 @@ const AppBar = ({ pages }) => {
     if (path) navigate(path)
   }
   return (
-    <>
+    <div className="header-and-nav">
+      <div className="logout">{
+        !!user && (
+          <button key={logout} onClick={logout}>Logout 🚪</button>
+        )
+      }</div>
       <header>
         <h1>Games Hub</h1>
       </header>
@@ -22,13 +28,8 @@ const AppBar = ({ pages }) => {
             </button>
           ))
         }
-        {
-          !!user && (
-            <button key={logout} onClick={logout}>Logout</button>
-          )
-        }
       </nav>
-    </>
+    </div>
   )
 }
 

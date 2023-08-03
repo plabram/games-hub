@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
-const TicTacToe = ({ tiles, setTiles, isStarted, setIsStarted, turn, setTurn, ticWon, setTicWon, ticLost, setTicLost }) => {
+const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, turn, setTurn }) => {
 
+  const players = ["X", "O"]
+
+
+  const initGame = () => {
+    setTiles([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ])
+    const randomPlayer = Math.round(Math.random())
+    setTurn(players[randomPlayer])
+    console.log(turn)
+  }
 
   const play = (a, b, player) => {
     const tempTiles = [...tiles]
@@ -16,14 +29,36 @@ const TicTacToe = ({ tiles, setTiles, isStarted, setIsStarted, turn, setTurn, ti
     else {
       const i = Math.floor(n / 3)
       const j = n % 3
+
+
       play(i, j, "O")
-      setTurn("X")
+    }
+  }
+
+  const clickHandler = (i, j) => {
+    if (tiles[i][j] === null && turn === "X") {
+      play(i, j, "X")
+      setTurn("O")
+      // computerPlays()
+    }
+    else if (turn !== "X") {
+      alert("The computer is playing.")
+    }
+    else {
+      alert("Someone has already used that tile.")
     }
   }
 
   useEffect(() => {
+    if (turn === "O") {
+      // return () => clearTimeout(timer);
+      computerPlays()
+      setTurn("X")
+    }
+  }, [turn])
 
-    const noNullTiles = !tiles.some((row) => (row.some(i => i === null)))
+  useEffect(() => {
+
     const finishGame = (user) => {
       if (tiles[0][0] === user && tiles[0][1] === user && tiles[0][2] === user ||
         tiles[1][0] === user && tiles[1][1] === user && tiles[1][2] === user ||
@@ -40,35 +75,23 @@ const TicTacToe = ({ tiles, setTiles, isStarted, setIsStarted, turn, setTurn, ti
     if (finishGame("X")) {
       alert("You win")
       setTicWon(ticWon + 1)
+      setTurn("X")
     }
     if (finishGame("O")) {
       alert("The computer wins")
       setTicLost(ticLost + 1)
-    }
-    if (!finishGame("X") && !finishGame("O") && noNullTiles) { alert("It's a draw") }
-  }, [tiles])
-
-
-
-  const clickHandler = (i, j) => {
-    if (tiles[i][j] === null && turn === "X") {
-      play(i, j, "X")
       setTurn("O")
-      computerPlays()
     }
-    else if (turn !== "X") {
-      alert("The computer is playing.")
-    }
-    else {
-      alert("Someone has already used that tile.")
-    }
-  }
+    if (!finishGame("X")
+      && !finishGame("O")
+      && !tiles.some((row) => (row.some(i => i === null)))) { alert("It's a draw") }
+  }, [tiles])
 
 
   return (
     <>
-      <button onClick={() => setIsStarted(!isStarted)}>{isStarted ? "End Game" : "Start Game"}</button>
-      <p>{(turn === "X") ? "It's X's turn." : "It's O's turn."}</p>
+      <button onClick={initGame}>New Game</button>
+      <p>Player: {turn}</p>
       <div>
         {tiles.map((row, rowIndex) => (
           <p key={rowIndex}>

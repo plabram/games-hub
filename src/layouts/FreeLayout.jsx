@@ -1,6 +1,6 @@
 import { Navigate, useOutlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import AppBar from "../components/AppBar"
+import AppBar from "../components/AppBar/AppBar"
 
 export const FreeLayout = () => {
   const { user } = useAuth()

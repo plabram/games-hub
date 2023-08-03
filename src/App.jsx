@@ -1,6 +1,6 @@
 import './App.css'
 import { Link, Routes, Route } from 'react-router-dom'
-import React, { lazy, useState } from 'react'
+import React, { lazy, useState, useEffect } from 'react'
 import { ProtectedLayout } from "../src/layouts/ProtectedLayout"
 import { FreeLayout } from "../src/layouts/FreeLayout"
 
@@ -12,8 +12,6 @@ const Hangman = lazy(() => import('./pages/Hangman/Hangman'))
 const Sudoku = lazy(() => import('./pages/Sudoku/Sudoku'))
 import Dashboard from "../src/pages/Profile"
 
-
-
 function App() {
 
   //TicTacToe States
@@ -22,7 +20,6 @@ function App() {
     [null, null, null],
     [null, null, null],
   ])
-  const [isStarted, setIsStarted] = useState(false)
   const [turn, setTurn] = useState("X")
 
   //Hangman States
@@ -44,6 +41,29 @@ function App() {
   const [sudoLost, setSudoLost] = useState(0)
 
 
+  //Persist states in local storage
+  // useEffect(() => {
+  //   setHangWon(JSON.parse(window.localStorage.getItem('hangWon')))
+  //   setHangLost(JSON.parse(window.localStorage.getItem('hangLost')))
+  //   setSudoWon(JSON.parse(window.localStorage.getItem('sudoWon')))
+  //   setSudoLost(JSON.parse(window.localStorage.getItem('sudoLost')))
+  //   setTicLost(JSON.parse(window.localStorage.getItem('ticLost')))
+  //   setTicWon(JSON.parse(window.localStorage.getItem('ticWon')))
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem('hangWon', hangWon)
+  //   window.localStorage.setItem('hangLost', hangLost)
+  //   window.localStorage.setItem('sudoWon', sudoWon)
+  //   window.localStorage.setItem('sudoLost', sudoLost)
+  //   window.localStorage.setItem('ticLost', ticLost)
+  //   window.localStorage.setItem('ticWon', ticWon)
+  // }, [
+  //   ticWon, ticLost, sudoWon, sudoLost, hangWon, hangLost
+
+  // ]);
+
+
   return (
     <>
       <Routes>
@@ -57,7 +77,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost} />} />
           <Route path="tictactoe" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
-              <TicTacToe tiles={tiles} setTiles={setTiles} isStarted={isStarted} setIsStarted={setIsStarted} turn={turn} setTurn={setTurn}
+              <TicTacToe tiles={tiles} setTiles={setTiles} turn={turn} setTurn={setTurn}
                 ticWon={ticWon} setTicWon={setTicWon} ticLost={ticLost} setTicLost={setTicLost}
               />
             </React.Suspense>
