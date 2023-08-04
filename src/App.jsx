@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import React, { lazy, useState } from 'react'
 
 import { ProtectedLayout } from "../src/layouts/ProtectedLayout"

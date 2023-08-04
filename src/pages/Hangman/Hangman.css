@@ -25,3 +25,7 @@
 form > button {
   margin: 5px;
 }
+
+.used-letters {
+  font-size: 1.6em
+}

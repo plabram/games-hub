@@ -6,8 +6,6 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
 }) => {
 
   const players = ["X", "O"]
-
-
   const initGame = () => {
     setTicVisible(true)
     setTiles([
@@ -23,44 +21,39 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
     const tempTiles = [...tiles]
     tempTiles[a][b] = `${player}`
     setTiles(tempTiles)
+    const nextPlayer = (players.indexOf(player) === 0) ? 1 : 0
+    setTurn(players[nextPlayer])
   }
 
-  const computerPlays = () => {
+  const playRandom = (player) => {
     const arrFlat = tiles.flat()
     const n = Math.round(Math.random() * arrFlat.length)
-    if (arrFlat[n] !== null) { computerPlays() }
+    if (arrFlat[n] !== null) { playRandom(player) }
     else {
       const i = Math.floor(n / 3)
       const j = n % 3
-      play(i, j, "O")
+      play(i, j, player)
     }
   }
 
   const clickHandler = (i, j) => {
-    if (tiles[i][j] === null && turn === "X") {
-      play(i, j, "X")
-      setTurn("O")
-      // computerPlays()
-    }
-    else if (turn !== "X") {
+    if (turn !== "X") {
       alert("The computer is playing.")
+    } else if (tiles[i][j] !== null) {
+      alert("Someone has already used that tile.")
     }
     else {
-      alert("Someone has already used that tile.")
+      play(i, j, "X")
     }
   }
 
   useEffect(() => {
     if (turn === "O") {
-      // return () => clearTimeout(timer);
-      computerPlays()
-      setTurn("X")
+      playRandom("O")
     }
   }, [turn])
 
   useEffect(() => {
-
-    console.log("render the board")
     const finishGame = (user) => {
       if (tiles[0][0] === user && tiles[0][1] === user && tiles[0][2] === user ||
         tiles[1][0] === user && tiles[1][1] === user && tiles[1][2] === user ||
@@ -77,12 +70,10 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
     if (finishGame("X")) {
       alert("You win")
       setTicWon(ticWon + 1)
-      setTurn("X")
     }
     if (finishGame("O")) {
       alert("The computer wins")
       setTicLost(ticLost + 1)
-      setTurn("O")
     }
     if (!finishGame("X")
       && !finishGame("O")

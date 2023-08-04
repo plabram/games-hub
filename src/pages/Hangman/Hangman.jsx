@@ -12,6 +12,7 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
     setRandomWord(random)
     setClue(random.split("").map(i => "_").join(" ").trim())
     setVisible(true)
+    setUsedLetters("")
   }
 
   const checkLetter = (e) => {
@@ -36,11 +37,11 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
     } else {
       setLives(lives - 1)
       if (lives == 0) {
-        alert("Sorry! You lost.")
+        alert(`Sorry! You lost. The word is ${randomWord}.`)
         setHangLost(hangLost + 1)
       }
       else {
-        alert("That letter doesn't exist")
+        alert("This letter isn't in the word.")
         setUsedLetters([...usedLetters, `${e.target.elements[0].value} `])
       }
     }
@@ -51,6 +52,7 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
     if (!clue.includes("_") && (clue !== "")) {
       alert("You won!")
       setHangWon(hangWon + 1)
+      initGame()
     }
   }, [clue])
 
@@ -63,7 +65,7 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
           <input placeholder="Type a letter" required />
           <button type="submit">Try</button>
         </form>
-        <p><s>{usedLetters}</s></p>
+        <p className="used-letters"><s>{usedLetters}</s></p>
       </div>
       <button onClick={initGame}>{visible ? "Start Over" : "Start"}</button>
     </div>
