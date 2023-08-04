@@ -1,22 +1,18 @@
 import { makepuzzle, solvepuzzle } from "sudoku";
 import "./Sudoku.css"
 
-const SudokuComponent = ({
-  sudokuBoard, setSudokuBoard,
-  sudoData, setSudoData,
-  result, setResult
-}) => {
+const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
 
   const initGame = () => {
     const newBoard = makepuzzle()
     const solution = solvepuzzle(newBoard)
     console.log(solution)
-    setSudokuBoard(newBoard)
     setSudoData({
       ...sudoData,
       visible: true,
       solution: solution,
-      solutionVisible: false
+      solutionVisible: false,
+      board: newBoard
     })
 
     const inputElements = document.querySelectorAll('input[type="number"]');
@@ -26,10 +22,11 @@ const SudokuComponent = ({
   }
 
   const changeHandler = (e, index) => {
-    const newBoard = sudokuBoard
+    const newBoard = sudoData.board
     newBoard[index] = e.target.valueAsNumber
-    setSudokuBoard(newBoard)
-    if (sudokuBoard && !sudokuBoard.some(cell => cell === null)) {
+
+    setSudoData({ ...sudoData, board: newBoard })
+    if (sudoData.board && !sudoData.board.some(cell => cell === null)) {
       setSudoData({
         ...sudoData,
         fullBoard: true
@@ -38,17 +35,8 @@ const SudokuComponent = ({
   }
 
   const clickHandler = () => {
-    let solution = ""
-    const solutionGrid = (arr) => {
-      let string = ""
-      for (const i in arr) {
-        string += `<span>${arr[i]}</span>`
-      }
-      return string
-    }
-
-    if (!sudokuBoard.some(cell => cell === null)
-      && sudokuBoard.every((value, index) => value === sudoData.solution[index])) {
+    if (!sudoData.board.some(cell => cell === null)
+      && sudoData.board.every((value, index) => value === sudoData.solution[index])) {
       alert("You won!")
       setResult({
         ...result,
@@ -74,8 +62,8 @@ const SudokuComponent = ({
       <div className="sudoku-game">
         <p>Each row and column must contain a number from 0-8, with no repeats.</p>
         <div className="sudoku-board">
-          {sudokuBoard &&
-            sudokuBoard.map((cell, index) => (
+          {sudoData.board &&
+            sudoData.board.map((cell, index) => (
               <button key={index} className="sudoku-cell">
                 {cell !== null ? cell :
                   <input type="number" max="9" min="0" onChange={(e) => changeHandler(e, index)} />}

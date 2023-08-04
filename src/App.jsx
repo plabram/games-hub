@@ -46,7 +46,7 @@ function App() {
       solutionVisible: false
     }
   )
-  const [sudokuBoard, setSudokuBoard] = useState(null)
+  // const [sudokuBoard, setSudokuBoard] = useState(null)
 
   //Wins and Losses
   const [result, setResult] = useState({
@@ -100,7 +100,7 @@ function App() {
               <Sudoku
                 sudoData={sudoData} setSudoData={setSudoData}
                 result={result} setResult={setResult}
-                sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard}
+              // sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard}
               />
             </React.Suspense>
           } />
