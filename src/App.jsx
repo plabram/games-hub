@@ -33,6 +33,17 @@ function App() {
   const [sudoVisible, setSudoVisible] = useState(false)
 
   //Wins and Losses
+
+  // const [wins, setWins] = useState({
+  //   ticWon: 0,
+  //   ticLost: 0,
+  //   hangWon: 0,
+  //   hangLost: 0,
+  //   sudoWon: 0,
+  //   sudoLost: 0
+  // }) 
+
+
   const [ticWon, setTicWon] = useState(0)
   const [ticLost, setTicLost] = useState(0)
   const [hangWon, setHangWon] = useState(0)
@@ -50,7 +61,8 @@ function App() {
         <Route path="/" element={<ProtectedLayout />}>
           <Route path="dashboard" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
-              <Dashboard ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost}
+              <Dashboard
+                ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost}
               />
             </React.Suspense>
           } />

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import "./TicTacToe.css"
 
 const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, turn, setTurn,
-  ticVisible, setTicVisible
-}) => {
+  ticVisible, setTicVisible }) => {
 
   const players = ["X", "O"]
+
   const initGame = () => {
     setTicVisible(true)
     setTiles([
@@ -19,16 +19,17 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
 
   const play = (a, b, player) => {
     const tempTiles = [...tiles]
-    tempTiles[a][b] = `${player}`
+    tempTiles[a][b] = `${players[player]}`
     setTiles(tempTiles)
-    const nextPlayer = (players.indexOf(player) === 0) ? 1 : 0
+    const nextPlayer = (player === 0) ? 1 : 0
     setTurn(players[nextPlayer])
   }
 
   const playRandom = (player) => {
     const arrFlat = tiles.flat()
     const n = Math.round(Math.random() * arrFlat.length)
-    if (arrFlat[n] !== null) { playRandom(player) }
+    if (arrFlat[n] !== null
+    ) { playRandom(player) }
     else {
       const i = Math.floor(n / 3)
       const j = n % 3
@@ -37,19 +38,19 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
   }
 
   const clickHandler = (i, j) => {
-    if (turn !== "X") {
+    if (turn === players[1]) {
       alert("The computer is playing.")
     } else if (tiles[i][j] !== null) {
       alert("Someone has already used that tile.")
     }
     else {
-      play(i, j, "X")
+      play(i, j, 0)
     }
   }
 
   useEffect(() => {
-    if (turn === "O") {
-      playRandom("O")
+    if (turn === players[1]) {
+      playRandom(1)
     }
   }, [turn])
 
@@ -67,17 +68,40 @@ const TicTacToe = ({ ticWon, setTicWon, ticLost, setTicLost, tiles, setTiles, tu
         return true
       else return false
     }
-    if (finishGame("X")) {
-      alert("You win")
+    if (finishGame(players[0])) {
       setTicWon(ticWon + 1)
+      setTiles([
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ])
+      setTurn("")
+      setTicVisible(false)
+      alert("You win")
     }
-    if (finishGame("O")) {
-      alert("The computer wins")
+    if (finishGame(players[1])) {
       setTicLost(ticLost + 1)
+      setTiles([
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ])
+      setTurn("")
+      setTicVisible(false)
+      alert("The computer wins")
     }
-    if (!finishGame("X")
-      && !finishGame("O")
-      && !tiles.some((row) => (row.some(i => i === null)))) { alert("It's a draw") }
+    if (!finishGame(players[0])
+      && !finishGame(players[1])
+      && !tiles.some((row) => (row.some(i => i === null)))) {
+      setTiles([
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ])
+      setTurn("")
+      setTicVisible(false)
+      alert("It's a draw")
+    }
   }, [tiles])
 
 
