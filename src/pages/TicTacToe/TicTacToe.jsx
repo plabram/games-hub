@@ -29,7 +29,7 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
   const playRandom = (player) => {
     const arrFlat = ticData.tiles.flat()
     const n = Math.round(Math.random() * arrFlat.length)
-    if (arrFlat[n] !== null) { playRandom(player) }
+    if (arrFlat[n] !== null && ticData.tiles.some((row) => (row.some(i => i === null)))) { playRandom(player) }
     else {
       const i = Math.floor(n / 3)
       const j = n % 3

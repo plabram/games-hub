@@ -43,7 +43,8 @@ function App() {
       fullBoard: false,
       visible: false,
       board: null,
-      solution: null
+      solution: null,
+      solutionVisible: false
     }
   )
   const [sudokuBoard, setSudokuBoard] = useState(null)

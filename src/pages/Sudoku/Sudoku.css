@@ -23,16 +23,18 @@
   margin-bottom: 10px;
 }
 
-.solution {
+.solution-visible {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   gap: 3px;
   padding-bottom: 10px;
+  max-width: 400px;
+  min-width: 300px;
+  text-align: center;
 }
 
-.solution > span {
-  padding: 0px;
-  margin: 0px
+.solution-invisible {
+  display: none;
 }
 
 .sudoku-board {
