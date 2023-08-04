@@ -11,7 +11,8 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
     const random = words[Math.round(Math.random() * words.length)]
     const randomPrettified = random.split("").map(i => "_").join(" ").trim()
     setHangData({
-      ...hangData,
+      lives: 5,
+      usedLetters: [],
       randomWord: random,
       clue: randomPrettified,
       visible: true
