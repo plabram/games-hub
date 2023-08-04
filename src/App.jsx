@@ -59,8 +59,8 @@ function App() {
   })
 
 
-  const [sudoWon, setSudoWon] = useState(0)
-  const [sudoLost, setSudoLost] = useState(0)
+  // const [sudoWon, setSudoWon] = useState(0)
+  // const [sudoLost, setSudoLost] = useState(0)
 
   return (
     <>
@@ -94,9 +94,11 @@ function App() {
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <Sudoku
                 // sudoData={sudoData} setSudoData={setSudoData}
-                // result={result} setResult={setResult}
-                sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard} fullBoard={fullBoard} setFullBoard={setFullBoard}
-                sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost} sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
+                result={result} setResult={setResult}
+                sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard}
+                fullBoard={fullBoard} setFullBoard={setFullBoard}
+                sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
+              //sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost} 
               />
             </React.Suspense>
           } />

@@ -2,7 +2,11 @@
 import { makepuzzle, solvepuzzle } from "sudoku";
 import "./Sudoku.css"
 
-const SudokuComponent = ({ sudokuBoard, setSudokuBoard, fullBoard, setFullBoard, sudoWon, setSudoWon, sudoLost, setSudoLost, sudoVisible, setSudoVisible }) => {
+const SudokuComponent = ({
+  sudokuBoard, setSudokuBoard, fullBoard, setFullBoard,
+  result, setResult,
+  // sudoWon, setSudoWon, sudoLost, setSudoLost, 
+  sudoVisible, setSudoVisible }) => {
 
   const solved = solvepuzzle(sudokuBoard)
 
@@ -36,14 +40,20 @@ const SudokuComponent = ({ sudokuBoard, setSudokuBoard, fullBoard, setFullBoard,
       return string
     }
 
-    if (sudokuBoard.every((value, index) => value === solved[index])) {
+    if (!sudokuBoard.some(cell => cell === null) && sudokuBoard.every((value, index) => value === solved[index])) {
       alert("You won!")
-      setSudoWon(sudoWon + 1)
+      setResult({
+        ...result,
+        sudoWon: result.sudoWon + 1
+      })
     }
     else {
       if (confirm("That wasn't right. See solution?")) {
         solution = solved
-        setSudoLost(sudoLost + 1)
+        setResult({
+          ...result,
+          sudoLost: result.sudoLost + 1
+        })
       }
     }
     document.getElementById("solution-grid").innerHTML = solutionGrid(solution);
