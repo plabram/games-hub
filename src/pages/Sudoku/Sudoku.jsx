@@ -65,7 +65,6 @@ const SudokuComponent = ({
           ...sudoData,
           solutionVisible: true
         })
-        // document.getElementById("solution-grid").innerHTML = solutionGrid(sudoData.solution)
       }
     }
   }
@@ -88,9 +87,9 @@ const SudokuComponent = ({
         <div className={sudoData.solutionVisible ? "solution-visible" : "solution-invisible"}>
           {sudoData.solution.map((cell, index) => <span key={index}>{cell}</span>)}
         </div>
-        <button onClick={initGame}>{sudoData.visible ? "Start Over" : "Start"}</button>
       </div>
-    </div>
+      <button onClick={initGame}>{sudoData.visible ? "Start Over" : "Start"}</button>
+    </div >
   )
 }
 

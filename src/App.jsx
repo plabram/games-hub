@@ -39,11 +39,10 @@ function App() {
   //Sudoku States
   const [sudoData, setSudoData] = useState(
     {
-      // board: null,
       fullBoard: false,
       visible: false,
       board: null,
-      solution: null,
+      solution: [],
       solutionVisible: false
     }
   )
