@@ -1,4 +1,5 @@
 import { makepuzzle, solvepuzzle } from "sudoku";
+import StartButton from "../../components/StartButton/StartButton";
 import "./Sudoku.css"
 
 const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
@@ -70,7 +71,8 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
           {sudoData.solution.map((cell, index) => <span key={index}>{cell}</span>)}
         </div>
       </div>
-      <button onClick={initGame}>{sudoData.visible ? "Start Over" : "Start"}</button>
+      <StartButton init={initGame} visibility={sudoData.visible} />
+      {/* <button onClick={initGame}>{sudoData.visible ? "Start Over" : "Start"}</button> */}
     </div >
   )
 }

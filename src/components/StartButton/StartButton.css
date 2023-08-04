@@ -1,0 +1,9 @@
+.button-start {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.button-start-again {
+  background-color: var(--dark);
+  color: var(--light)
+}

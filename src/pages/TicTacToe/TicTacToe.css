@@ -11,7 +11,7 @@
   display: block;
 }
 
-.tictactoe-visible > button {
+/* .tictactoe-visible > button {
   background-color: var(--dark);
   color: var(--light)
 }
@@ -19,7 +19,7 @@
 .tictactoe-invisible > button {
   font-size: 2rem;
   margin-top: 20px;
-}
+} */
 
 .board {
   padding-bottom: 10px;

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import StartButton from '../../components/StartButton/StartButton'
 import "./Hangman.css"
 
 
@@ -97,7 +98,8 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
         </form>
         <p className="used-letters"><s>{hangData.usedLetters}</s></p>
       </div>
-      <button onClick={initGame}>{hangData.visible ? "Start Over" : "Start"}</button>
+      <StartButton init={initGame} visibility={hangData.visible} />
+      {/* <button onClick={initGame}>{hangData.visible ? "Start Over" : "Start"}</button> */}
     </div>
   )
 }

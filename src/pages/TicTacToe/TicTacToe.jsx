@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import StartButton from '../../components/StartButton/StartButton'
 import "./TicTacToe.css"
 
 const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
 
 
-  const players = ["X", "O"]
+  const players = ["🥷", "💻"]
 
   const initGame = () => {
     const randomPlayer = Math.round(Math.random())
     setTicData({
-      ...ticData,
+      tiles: [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ],
       turn: players[randomPlayer],
       visible: true
     })
@@ -72,7 +77,10 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
       else return false
     }
     if (finishGame(players[0])) {
-      alert("You win")
+      alert(`
+      ${players[0]}
+      You win.
+      `)
       setResult({
         ...result,
         ticWon: result.ticWon + 1
@@ -88,7 +96,10 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
       })
     }
     else if (finishGame(players[1])) {
-      alert("The computer wins")
+      alert(`
+      ${players[1]}
+      The computer wins
+      `)
       setResult({
         ...result,
         ticWon: result.ticLost + 1
@@ -106,7 +117,10 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
     else if (!finishGame(players[0])
       && !finishGame(players[1])
       && !ticData.tiles.some((row) => (row.some(i => i === null)))) {
-      alert("It's a draw")
+      alert(`
+      ${players[0]} ${players[1]}
+      No-one wins.
+      `)
       setTicData({
         tiles: [
           [null, null, null],
@@ -136,7 +150,8 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
           ))}
         </div>
       </div>
-      <button onClick={initGame}>{ticData.visible ? "Start Over" : "Start"}</button>
+      <StartButton init={initGame} visibility={ticData.visible} />
+      {/* <button onClick={initGame}>{ticData.visible ? "Start Over" : "Start"}</button> */}
     </div>
   )
 }
