@@ -42,13 +42,13 @@ function App() {
       // board: null,
       fullBoard: false,
       visible: false,
-      board: null
+      board: null,
+      solution: null
     }
   )
   const [sudokuBoard, setSudokuBoard] = useState(null)
 
   //Wins and Losses
-
   const [result, setResult] = useState({
     ticWon: 0,
     ticLost: 0,

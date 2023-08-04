@@ -49,6 +49,13 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
           ...result,
           hangLost: result.hangLost + 1
         })
+        setHangData({
+          clue: "",
+          randomWord: "",
+          lives: 5,
+          usedLetters: [],
+          visible: false
+        })
       }
       else {
         alert("This letter isn't in the word.")
@@ -69,7 +76,13 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
         ...result,
         hangWon: result.hangWon + 1
       })
-      initGame()
+      setHangData({
+        clue: "",
+        randomWord: "",
+        lives: 5,
+        usedLetters: [],
+        visible: false
+      })
     }
   }, [hangData.clue])
 

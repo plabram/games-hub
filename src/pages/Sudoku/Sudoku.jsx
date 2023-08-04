@@ -4,36 +4,31 @@ import "./Sudoku.css"
 const SudokuComponent = ({
   sudokuBoard, setSudokuBoard,
   sudoData, setSudoData,
-  // fullBoard, setFullBoard,
-  // sudoVisible, setSudoVisible,
   result, setResult
 }) => {
 
-  const solved = solvepuzzle(sudokuBoard)
-
   const initGame = () => {
     const newBoard = makepuzzle()
+    const solution = solvepuzzle(newBoard)
+    console.log(solution)
     setSudokuBoard(newBoard)
     setSudoData({
       ...sudoData,
-      visible: true
+      visible: true,
+      solution: solution
     })
-    // setSudoVisible(true)
-    console.log(solved)
+
     const inputElements = document.querySelectorAll('input[type="number"]');
     inputElements.forEach((input) => {
       input.value = '';
     })
   }
 
-  console.log(solved)
-
   const changeHandler = (e, index) => {
     const newBoard = sudokuBoard
     newBoard[index] = e.target.valueAsNumber
     setSudokuBoard(newBoard)
     if (sudokuBoard && !sudokuBoard.some(cell => cell === null)) {
-      // setFullBoard(true) 
       setSudoData({
         ...sudoData,
         fullBoard: true
@@ -52,7 +47,7 @@ const SudokuComponent = ({
     }
 
     if (!sudokuBoard.some(cell => cell === null)
-      && sudokuBoard.every((value, index) => value === solved[index])) {
+      && sudokuBoard.every((value, index) => value === sudoData.solution[index])) {
       alert("You won!")
       setResult({
         ...result,
@@ -61,15 +56,13 @@ const SudokuComponent = ({
     }
     else {
       if (confirm("That wasn't right. See solution?")) {
-        solution = solved
-        console.log("the solution is", solution)
         setResult({
           ...result,
           sudoLost: result.sudoLost + 1
         })
+        document.getElementById("solution-grid").innerHTML = solutionGrid(sudoData.solution)
       }
     }
-    document.getElementById("solution-grid").innerHTML = solutionGrid(solution);
   }
 
   return (
