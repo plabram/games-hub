@@ -22,16 +22,10 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
   }
 
   const changeHandler = (e, index) => {
-    const copyBoard = sudoData.board
-    copyBoard[index] = e.target.valueAsNumber
+    const tempBoard = sudoData.board
+    tempBoard[index] = e.target.valueAsNumber
 
-    setSudoData({ ...sudoData, board: copyBoard })
-    // if (sudoData.board && !sudoData.board.some(cell => cell === null)) {
-    //   setSudoData({
-    //     ...sudoData,
-    //     fullBoard: true
-    //   })
-    // }
+    setSudoData({ ...sudoData, board: tempBoard })
   }
 
   const clickHandler = () => {

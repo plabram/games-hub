@@ -39,14 +39,12 @@ function App() {
   //Sudoku States
   const [sudoData, setSudoData] = useState(
     {
-      fullBoard: false,
       visible: false,
       board: [],
       solution: [],
       solutionVisible: false
     }
   )
-  // const [sudokuBoard, setSudokuBoard] = useState(null)
 
   //Wins and Losses
   const [result, setResult] = useState({
@@ -82,25 +80,21 @@ function App() {
           <Route path="tictactoe" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <TicTacToe
-                ticData={ticData} setTicData={setTicData}
-                result={result} setResult={setResult}
+                ticData={ticData} setTicData={setTicData} result={result} setResult={setResult}
               />
             </React.Suspense>
           } />
           <Route path="hangman" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <Hangman
-                hangData={hangData} setHangData={setHangData}
-                result={result} setResult={setResult}
+                hangData={hangData} setHangData={setHangData} result={result} setResult={setResult}
               />
             </React.Suspense>
           } />
           <Route path="sudoku" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <Sudoku
-                sudoData={sudoData} setSudoData={setSudoData}
-                result={result} setResult={setResult}
-              // sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard}
+                sudoData={sudoData} setSudoData={setSudoData} result={result} setResult={setResult}
               />
             </React.Suspense>
           } />
