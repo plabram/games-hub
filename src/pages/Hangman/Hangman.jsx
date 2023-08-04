@@ -2,17 +2,19 @@ import React, { useEffect } from 'react'
 import "./Hangman.css"
 
 
-const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, usedLetters, setUsedLetters,
-  hangWon, setHangWon, hangLost, setHangLost, visible, setVisible }) => {
+const Hangman = ({ hangData, setHangData, result, setResult }) => {
 
   const words = ["diplomatic", "health", "thaw", "victory", "casualty", "union", "year", "pension", "assumption", "texture"]
 
   const initGame = () => {
     const random = words[Math.round(Math.random() * words.length)]
-    setRandomWord(random)
-    setClue(random.split("").map(i => "_").join(" ").trim())
-    setVisible(true)
-    setUsedLetters("")
+    const randomPrettified = random.split("").map(i => "_").join(" ").trim()
+    setHangData({
+      ...hangData,
+      randomWord: random,
+      clue: randomPrettified,
+      visible: true
+    })
   }
 
   const checkLetter = (e) => {
@@ -31,43 +33,52 @@ const Hangman = ({ clue, setClue, randomWord, setRandomWord, lives, setLives, us
       return newClue.join(" ").trim()
     }
 
-    if (randomWord.includes(e.target.elements[0].value)) {
-      const nextClue = findAndReplaceLetters(e.target.elements[0].value, randomWord, clue)
-      setClue(nextClue)
+    if (hangData.randomWord.includes(e.target.elements[0].value)) {
+      const nextClue = findAndReplaceLetters(e.target.elements[0].value, hangData.randomWord, hangData.clue)
+      setHangData({ ...hangData, clue: nextClue })
     } else {
-      setLives(lives - 1)
-      if (lives == 0) {
-        alert(`Sorry! You lost. The word is ${randomWord}.`)
-        setHangLost(hangLost + 1)
+      setHangData({ ...hangData, lives: hangData.lives - 1 })
+
+      if (hangData.lives == 0) {
+        alert(`Sorry! You lost. The word is ${hangData.randomWord}.`)
+        setResult({
+          ...result,
+          hangLost: result.hangLost + 1
+        })
       }
       else {
         alert("This letter isn't in the word.")
-        setUsedLetters([...usedLetters, `${e.target.elements[0].value} `])
+        console.log(hangData.usedLetters)
+        setHangData({ ...hangData, usedLetters: [...hangData.usedLetters, e.target.elements[0].value] })
+        console.log(hangData.usedLetters)
       }
     }
     e.target.elements[0].value = ""
   }
 
   useEffect(() => {
-    if (!clue.includes("_") && (clue !== "")) {
+    if (!hangData.clue.includes("_") && (hangData.clue !== "")) {
       alert("You won!")
-      setHangWon(hangWon + 1)
+      setResult({
+        ...result,
+        hangWon: result.hangWon + 1
+      })
       initGame()
     }
-  }, [clue])
+  }, [hangData.clue])
 
   return (
-    <div className={visible ? "hangman-visible" : "hangman-invisible"}>
+    <div className={hangData.visible ? "hangman-visible" : "hangman-invisible"}>
       <div className="hangman-game">
-        <p>{(lives >= 0) ? `Lives remaining: ${lives}` : "You lose"}</p>
-        <p className="clue">{clue}</p>
+        <p>{(hangData.lives >= 0) ? `Lives remaining: ${hangData.lives}` : "You lose"}</p>
+        <p className="clue">{hangData.clue}</p>
         <form onSubmit={checkLetter}>
           <input placeholder="Type a letter" required />
           <button type="submit">Try</button>
         </form>
-        <p className="used-letters"><s>{usedLetters}</s></p>
+        <p className="used-letters"><s>{hangData.usedLetters}</s></p>
       </div>
-      <button onClick={initGame}>{visible ? "Start Over" : "Start"}</button>
+      <button onClick={initGame}>{hangData.visible ? "Start Over" : "Start"}</button>
     </div>
   )
 }

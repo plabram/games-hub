@@ -4,7 +4,9 @@ import { useAuth } from '../../hooks/useAuth';
 import "./Dashboard.css"
 
 
-const Dashboard = ({ ticWon, ticLost, hangWon, hangLost, sudoWon, sudoLost }) => {
+const Dashboard = (result) => {
+
+  const { ticWon, ticLost, hangWon, hangLost, sudoWon, sudoLost } = result
   const { user } = useAuth()
   const outlet = useOutlet()
 

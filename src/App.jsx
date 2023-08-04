@@ -13,44 +13,54 @@ const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'))
 function App() {
 
   //TicTacToe States
-  const [tiles, setTiles] = useState([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ])
-  const [turn, setTurn] = useState("")
+  const [ticData, setTicData] = useState(
+    {
+      tiles: [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ],
+      turn: "",
+      visible: false
+    }
+  )
 
   //Hangman States
-  const [clue, setClue] = useState("")
-  const [randomWord, setRandomWord] = useState("")
-  const [lives, setLives] = useState(5)
-  const [usedLetters, setUsedLetters] = useState("")
-  const [visible, setVisible] = useState(false)
+  const [hangData, setHangData] = useState(
+    {
+      clue: "",
+      randomWord: "",
+      lives: 5,
+      usedLetters: [],
+      visible: false
+    }
+  )
 
   //Sudoku States
+  // const [sudoData, setSudoData] = useState(
+  //   {
+  //     board: null,
+  //     fullBoard: false,
+  //     visible: false
+  //   }
+  // )
   const [sudokuBoard, setSudokuBoard] = useState(null)
   const [fullBoard, setFullBoard] = useState(false)
   const [sudoVisible, setSudoVisible] = useState(false)
 
   //Wins and Losses
+  const [result, setResult] = useState({
+    ticWon: 0,
+    ticLost: 0,
+    hangWon: 0,
+    hangLost: 0,
+    sudoWon: 0,
+    sudoLost: 0
+  })
 
-  // const [wins, setWins] = useState({
-  //   ticWon: 0,
-  //   ticLost: 0,
-  //   hangWon: 0,
-  //   hangLost: 0,
-  //   sudoWon: 0,
-  //   sudoLost: 0
-  // }) 
 
-
-  const [ticWon, setTicWon] = useState(0)
-  const [ticLost, setTicLost] = useState(0)
-  const [hangWon, setHangWon] = useState(0)
-  const [hangLost, setHangLost] = useState(0)
   const [sudoWon, setSudoWon] = useState(0)
   const [sudoLost, setSudoLost] = useState(0)
-  const [ticVisible, setTicVisible] = useState(false)
 
   return (
     <>
@@ -61,29 +71,31 @@ function App() {
         <Route path="/" element={<ProtectedLayout />}>
           <Route path="dashboard" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
-              <Dashboard
-                ticWon={ticWon} ticLost={ticLost} hangWon={hangWon} hangLost={hangLost} sudoWon={sudoWon} sudoLost={sudoLost}
-              />
+              <Dashboard {...result} />
             </React.Suspense>
           } />
           <Route path="tictactoe" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
-              <TicTacToe tiles={tiles} setTiles={setTiles} turn={turn} setTurn={setTurn}
-                ticWon={ticWon} setTicWon={setTicWon} ticLost={ticLost} setTicLost={setTicLost}
-                ticVisible={ticVisible} setTicVisible={setTicVisible}
+              <TicTacToe
+                ticData={ticData} setTicData={setTicData}
+                result={result} setResult={setResult}
               />
             </React.Suspense>
           } />
           <Route path="hangman" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
-              <Hangman clue={clue} setClue={setClue} randomWord={randomWord} setRandomWord={setRandomWord} lives={lives} setLives={setLives} usedLetters={usedLetters} setUsedLetters={setUsedLetters}
-                visible={visible} setVisible={setVisible} hangWon={hangWon} setHangWon={setHangWon} hangLost={hangLost} setHangLost={setHangLost}
+              <Hangman
+                hangData={hangData} setHangData={setHangData}
+                result={result} setResult={setResult}
               />
             </React.Suspense>
           } />
           <Route path="sudoku" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
-              <Sudoku sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard} fullBoard={fullBoard} setFullBoard={setFullBoard}
+              <Sudoku
+                // sudoData={sudoData} setSudoData={setSudoData}
+                // result={result} setResult={setResult}
+                sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard} fullBoard={fullBoard} setFullBoard={setFullBoard}
                 sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost} sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
               />
             </React.Suspense>
