@@ -1,18 +1,23 @@
-// import React, { useState, useEffect } from 'react'
 import { makepuzzle, solvepuzzle } from "sudoku";
 import "./Sudoku.css"
 
 const SudokuComponent = ({
-  sudokuBoard, setSudokuBoard, fullBoard, setFullBoard,
-  result, setResult,
-  // sudoWon, setSudoWon, sudoLost, setSudoLost, 
-  sudoVisible, setSudoVisible }) => {
+  sudokuBoard, setSudokuBoard,
+  sudoData, setSudoData,
+  // fullBoard, setFullBoard,
+  // sudoVisible, setSudoVisible,
+  result, setResult
+}) => {
 
   const solved = solvepuzzle(sudokuBoard)
 
   const initGame = () => {
-    setSudoVisible(true)
     const newBoard = makepuzzle()
+    setSudoData({
+      ...sudoData,
+      visible: true
+    })
+    // setSudoVisible(true)
     setSudokuBoard(newBoard)
     console.log(solved)
     const inputElements = document.querySelectorAll('input[type="number"]');
@@ -27,7 +32,13 @@ const SudokuComponent = ({
     const newBoard = sudokuBoard
     newBoard[index] = e.target.valueAsNumber
     setSudokuBoard(newBoard)
-    if (sudokuBoard && !sudokuBoard.some(cell => cell === null)) { setFullBoard(true) }
+    if (sudokuBoard && !sudokuBoard.some(cell => cell === null)) {
+      // setFullBoard(true) 
+      setSudoData({
+        ...sudoData,
+        fullBoard: true
+      })
+    }
   }
 
   const clickHandler = () => {
@@ -40,7 +51,8 @@ const SudokuComponent = ({
       return string
     }
 
-    if (!sudokuBoard.some(cell => cell === null) && sudokuBoard.every((value, index) => value === solved[index])) {
+    if (!sudokuBoard.some(cell => cell === null)
+      && sudokuBoard.every((value, index) => value === solved[index])) {
       alert("You won!")
       setResult({
         ...result,
@@ -60,7 +72,7 @@ const SudokuComponent = ({
   }
 
   return (
-    <div className={sudoVisible ? "sudo-visible" : "sudo-invisible"}>
+    <div className={sudoData.visible ? "sudo-visible" : "sudo-invisible"}>
       <div className="sudoku-game">
         <p>Each row and column must contain a number from 0-8, with no repeats.</p>
         <div className="sudoku-board">
@@ -72,10 +84,10 @@ const SudokuComponent = ({
               </button>
             ))}
         </div>
-        <button className={fullBoard ? "button-visible" : "button-invisible"} onClick={clickHandler}>Check Answer</button>
+        <button className={sudoData.fullBoard ? "button-visible" : "button-invisible"} onClick={clickHandler}>Check Answer</button>
         <div id="solution-grid" className="solution"></div>
       </div>
-      <button onClick={initGame}>{sudoVisible ? "Start Over" : "Start"}</button>
+      <button onClick={initGame}>{sudoData.visible ? "Start Over" : "Start"}</button>
     </div>
   )
 }

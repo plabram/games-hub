@@ -37,16 +37,16 @@ function App() {
   )
 
   //Sudoku States
-  // const [sudoData, setSudoData] = useState(
-  //   {
-  //     board: null,
-  //     fullBoard: false,
-  //     visible: false
-  //   }
-  // )
+  const [sudoData, setSudoData] = useState(
+    {
+      // board: null,
+      fullBoard: false,
+      visible: false
+    }
+  )
   const [sudokuBoard, setSudokuBoard] = useState(null)
-  const [fullBoard, setFullBoard] = useState(false)
-  const [sudoVisible, setSudoVisible] = useState(false)
+  // const [fullBoard, setFullBoard] = useState(false)
+  // const [sudoVisible, setSudoVisible] = useState(false)
 
   //Wins and Losses
   const [result, setResult] = useState({
@@ -57,10 +57,6 @@ function App() {
     sudoWon: 0,
     sudoLost: 0
   })
-
-
-  // const [sudoWon, setSudoWon] = useState(0)
-  // const [sudoLost, setSudoLost] = useState(0)
 
   return (
     <>
@@ -93,12 +89,11 @@ function App() {
           <Route path="sudoku" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <Sudoku
-                // sudoData={sudoData} setSudoData={setSudoData}
+                sudoData={sudoData} setSudoData={setSudoData}
                 result={result} setResult={setResult}
                 sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard}
-                fullBoard={fullBoard} setFullBoard={setFullBoard}
-                sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
-              //sudoWon={sudoWon} setSudoWon={setSudoWon} sudoLost={sudoLost} setSudoLost={setSudoLost} 
+              // fullBoard={fullBoard} setFullBoard={setFullBoard}
+              // sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
               />
             </React.Suspense>
           } />
