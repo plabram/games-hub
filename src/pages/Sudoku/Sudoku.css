@@ -1,4 +1,4 @@
-.sudo-invisible > .sudoku-game {
+.sudo-invisible > .sudoku-game, .button-invisible, .solution-invisible {
   display: none;
 }
 
@@ -18,11 +18,6 @@
   margin-bottom: 10px;
 }
 
-.button-invisible {
-  display: inline;
-  margin-bottom: 10px;
-}
-
 .solution-visible {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
@@ -31,10 +26,6 @@
   max-width: 400px;
   min-width: 300px;
   text-align: center;
-}
-
-.solution-invisible {
-  display: none;
 }
 
 .sudoku-board {
