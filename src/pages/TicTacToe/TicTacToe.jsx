@@ -29,8 +29,7 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
   const playRandom = (player) => {
     const arrFlat = ticData.tiles.flat()
     const n = Math.round(Math.random() * arrFlat.length)
-    if (arrFlat[n] !== null
-    ) { playRandom(player) }
+    if (arrFlat[n] !== null) { playRandom(player) }
     else {
       const i = Math.floor(n / 3)
       const j = n % 3
@@ -71,38 +70,50 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
       else return false
     }
     if (finishGame(players[0])) {
+      alert("You win")
       setResult({
         ...result,
         ticWon: result.ticWon + 1
       })
       setTicData({
-        ...ticData,
+        tiles: [
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ],
         turn: "",
         visible: false
       })
-      alert("You win")
     }
     if (finishGame(players[1])) {
+      alert("The computer wins")
       setResult({
         ...result,
         ticWon: result.ticLost + 1
       })
       setTicData({
-        ...ticData,
+        tiles: [
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ],
         turn: "",
         visible: false
       })
-      alert("The computer wins")
     }
     if (!finishGame(players[0])
       && !finishGame(players[1])
       && !ticData.tiles.some((row) => (row.some(i => i === null)))) {
+      alert("It's a draw")
       setTicData({
-        ...ticData,
+        tiles: [
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ],
         turn: "",
         visible: false
       })
-      alert("It's a draw")
     }
   }, [ticData.tiles])
 

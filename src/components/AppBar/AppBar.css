@@ -18,3 +18,23 @@ nav > button {
 .header-and-nav {
   padding-bottom: 20px
 }
+
+nav a.active {
+  background: var(--light);
+  color: var(--accent);
+}
+
+nav a {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--dark);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+nav a:hover {
+  border-color: var(--accent);
+}

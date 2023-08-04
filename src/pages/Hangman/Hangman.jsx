@@ -35,10 +35,14 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
 
     if (hangData.randomWord.includes(e.target.elements[0].value)) {
       const nextClue = findAndReplaceLetters(e.target.elements[0].value, hangData.randomWord, hangData.clue)
-      setHangData({ ...hangData, clue: nextClue })
-    } else {
-      setHangData({ ...hangData, lives: hangData.lives - 1 })
 
+
+      setHangData({
+        ...hangData,
+        clue: nextClue
+      })
+    }
+    else {
       if (hangData.lives == 0) {
         alert(`Sorry! You lost. The word is ${hangData.randomWord}.`)
         setResult({
@@ -48,9 +52,11 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
       }
       else {
         alert("This letter isn't in the word.")
-        console.log(hangData.usedLetters)
-        setHangData({ ...hangData, usedLetters: [...hangData.usedLetters, e.target.elements[0].value] })
-        console.log(hangData.usedLetters)
+        setHangData({
+          ...hangData,
+          usedLetters: [...hangData.usedLetters, e.target.elements[0].value],
+          lives: hangData.lives - 1
+        })
       }
     }
     e.target.elements[0].value = ""

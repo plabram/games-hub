@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import "./AppBar.css"
 
@@ -28,13 +28,18 @@ const AppBar = ({ pages }) => {
         <h1>Games Hub</h1>
       </header>
       <nav>
+        <NavLink to="/tictactoe">Tictactoe</NavLink>
+        <NavLink to="/hangman">Hangman</NavLink>
+        <NavLink to="/sudoku">Sudoku</NavLink>
+
+        {/* 
         {
           pages?.map((page) => (
             <button key={page.label} onClick={() => handleNavigate(page.path)}>
               {page.label}
             </button>
           ))
-        }
+        } */}
       </nav>
     </div>
   )

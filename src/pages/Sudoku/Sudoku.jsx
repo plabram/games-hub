@@ -13,12 +13,12 @@ const SudokuComponent = ({
 
   const initGame = () => {
     const newBoard = makepuzzle()
+    setSudokuBoard(newBoard)
     setSudoData({
       ...sudoData,
       visible: true
     })
     // setSudoVisible(true)
-    setSudokuBoard(newBoard)
     console.log(solved)
     const inputElements = document.querySelectorAll('input[type="number"]');
     inputElements.forEach((input) => {
@@ -62,6 +62,7 @@ const SudokuComponent = ({
     else {
       if (confirm("That wasn't right. See solution?")) {
         solution = solved
+        console.log("the solution is", solution)
         setResult({
           ...result,
           sudoLost: result.sudoLost + 1

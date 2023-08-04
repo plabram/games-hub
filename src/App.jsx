@@ -1,6 +1,6 @@
 import './App.css'
-import { Routes, Route, useLocation } from 'react-router-dom'
-import React, { lazy, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import React, { lazy, useState, useEffect } from 'react'
 
 import { ProtectedLayout } from "../src/layouts/ProtectedLayout"
 import { FreeLayout } from "./layouts/FreeLayout/FreeLayout"
@@ -41,14 +41,14 @@ function App() {
     {
       // board: null,
       fullBoard: false,
-      visible: false
+      visible: false,
+      board: null
     }
   )
   const [sudokuBoard, setSudokuBoard] = useState(null)
-  // const [fullBoard, setFullBoard] = useState(false)
-  // const [sudoVisible, setSudoVisible] = useState(false)
 
   //Wins and Losses
+
   const [result, setResult] = useState({
     ticWon: 0,
     ticLost: 0,
@@ -57,6 +57,15 @@ function App() {
     sudoWon: 0,
     sudoLost: 0
   })
+
+  // const [result, setResult] = useState(() => window.localStorage.setItem("result", {
+  //   ticWon: 0,
+  //   ticLost: 0,
+  //   hangWon: 0,
+  //   hangLost: 0,
+  //   sudoWon: 0,
+  //   sudoLost: 0
+  // }))
 
   return (
     <>
@@ -92,8 +101,6 @@ function App() {
                 sudoData={sudoData} setSudoData={setSudoData}
                 result={result} setResult={setResult}
                 sudokuBoard={sudokuBoard} setSudokuBoard={setSudokuBoard}
-              // fullBoard={fullBoard} setFullBoard={setFullBoard}
-              // sudoVisible={sudoVisible} setSudoVisible={setSudoVisible}
               />
             </React.Suspense>
           } />
