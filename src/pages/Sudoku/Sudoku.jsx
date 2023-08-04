@@ -6,7 +6,7 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
   const initGame = () => {
     const newBoard = makepuzzle()
     const solution = solvepuzzle(newBoard)
-    console.log(solution)
+
     setSudoData({
       ...sudoData,
       visible: true,
@@ -22,16 +22,16 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
   }
 
   const changeHandler = (e, index) => {
-    const newBoard = sudoData.board
-    newBoard[index] = e.target.valueAsNumber
+    const copyBoard = sudoData.board
+    copyBoard[index] = e.target.valueAsNumber
 
-    setSudoData({ ...sudoData, board: newBoard })
-    if (sudoData.board && !sudoData.board.some(cell => cell === null)) {
-      setSudoData({
-        ...sudoData,
-        fullBoard: true
-      })
-    }
+    setSudoData({ ...sudoData, board: copyBoard })
+    // if (sudoData.board && !sudoData.board.some(cell => cell === null)) {
+    //   setSudoData({
+    //     ...sudoData,
+    //     fullBoard: true
+    //   })
+    // }
   }
 
   const clickHandler = () => {
@@ -70,7 +70,7 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
               </button>
             ))}
         </div>
-        <button className={sudoData.fullBoard ? "button-visible" : "button-invisible"} onClick={clickHandler}>Check Answer</button>
+        <button className={(!sudoData.board.some(cell => cell === null)) ? "button-visible" : "button-invisible"} onClick={clickHandler}>Check Answer</button>
 
         <div className={sudoData.solutionVisible ? "solution-visible" : "solution-invisible"}>
           {sudoData.solution.map((cell, index) => <span key={index}>{cell}</span>)}

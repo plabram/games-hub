@@ -41,7 +41,7 @@ function App() {
     {
       fullBoard: false,
       visible: false,
-      board: null,
+      board: [],
       solution: [],
       solutionVisible: false
     }
