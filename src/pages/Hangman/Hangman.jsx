@@ -94,7 +94,8 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
         <p>{(hangData.lives >= 0) ? `Lives remaining: ${hangData.lives}` : "You lose"}</p>
         <p className="clue">{hangData.clue}</p>
         <form onSubmit={checkLetter}>
-          <input placeholder="Type a letter" required />
+          <label>Type a letter</label>
+          <input maxLength="1" required />
           <button type="submit">Try</button>
         </form>
         <p className="used-letters"><s>{hangData.usedLetters}</s></p>

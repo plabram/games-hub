@@ -24,8 +24,12 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
 
   const changeHandler = (e, index) => {
     const tempBoard = sudoData.board
-    tempBoard[index] = e.target.valueAsNumber
-
+    if (!isNaN(e.target.valueAsNumber)) {
+      tempBoard[index] = e.target.valueAsNumber
+    }
+    else {
+      tempBoard[index] = null
+    }
     setSudoData({ ...sudoData, board: tempBoard })
   }
 
@@ -60,7 +64,7 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
           {sudoData.board &&
             sudoData.board.map((cell, index) => (
               <button key={index} className="sudoku-cell">
-                {cell !== null ? cell :
+                {cell !== null ? <input placeholder={cell} type="number" max="9" min="0" onChange={(e) => changeHandler(e, index)} /> :
                   <input type="number" max="9" min="0" onChange={(e) => changeHandler(e, index)} />}
               </button>
             ))}
@@ -72,7 +76,6 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
         </div>
       </div>
       <StartButton init={initGame} visibility={sudoData.visible} />
-      {/* <button onClick={initGame}>{sudoData.visible ? "Start Over" : "Start"}</button> */}
     </div >
   )
 }

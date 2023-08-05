@@ -29,3 +29,21 @@ form > button {
 .used-letters {
   font-size: 1.6em
 }
+
+.hangman-game input {
+  font-size: 1.4em;
+  padding: 5px;
+  border-radius: 5px;
+  border: solid 1px var(--light);
+  max-width: 4em;
+  background-color: var(--accent);
+  text-align: center;
+  caret-color: var(--dark);
+  color: var(--dark)
+}
+
+form {
+  display: grid;
+  justify-content: center;
+  gap: 3px
+}

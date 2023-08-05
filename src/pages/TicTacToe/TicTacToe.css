@@ -23,4 +23,11 @@
 
 .board {
   padding-bottom: 10px;
+  font-size: 2em;
+}
+
+.tic-button {
+  margin: 2px;
+  background: var(--accent);
+  border: 1px solid var(--light)
 }

@@ -8,11 +8,6 @@
   align-items: center;
 }
 
-/* .sudo-invisible > button {
-  font-size: 2rem;
-  margin-top: 20px;
-} */
-
 .button-visible {
   display: inline;
   margin-bottom: 10px;
@@ -43,15 +38,11 @@
   margin: 0px;
 }
 
-/* .sudo-visible > button {
-  background-color: var(--dark);
-  color: var(--light)
-} */
-
 input {
   background-color: var(--dark);
   border: none;
   font-size: 1em;
+  color: var(--accent)
   
 }
 

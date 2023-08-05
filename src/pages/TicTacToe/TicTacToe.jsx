@@ -142,7 +142,7 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
           {ticData.tiles.map((row, rowIndex) => (
             <p key={rowIndex}>
               {row.map((tile, columnIndex) => (
-                <button key={columnIndex} onClick={() => clickHandler(rowIndex, columnIndex)}>
+                <button className="tic-button" key={columnIndex} onClick={() => clickHandler(rowIndex, columnIndex)}>
                   {tile}
                 </button>
               ))}
