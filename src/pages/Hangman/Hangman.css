@@ -2,19 +2,19 @@
   display: none;
 }
 
-.hangman-invisible > button {
+/* .hangman-invisible > button {
   font-size: 2rem;
   margin-top: 20px;
-}
+} */
 
 .hangman-visible > .hangman-game {
   display: block;
 }
 
-.hangman-visible > button {
+/* .hangman-visible > button {
   background-color: var(--dark);
   color: var(--light)
-}
+} */
 
 .clue {
   margin-top: 40px;
