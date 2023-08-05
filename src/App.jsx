@@ -2,9 +2,9 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import React, { lazy, useState, useEffect } from 'react'
 
-const FreeLayout = lazy(() => import("../src/layouts/ProtectedLayout"))
-const ProtectedLayout = lazy(() => import("./layouts/FreeLayout/FreeLayout"))
-const Login = lazy(() => import("../src/pages/Login"))
+import { ProtectedLayout } from "../src/layouts/ProtectedLayout"
+import { FreeLayout } from "./layouts/FreeLayout/FreeLayout"
+import { Login } from "../src/pages/Login"
 const TicTacToe = lazy(() => import('./pages/TicTacToe/TicTacToe'))
 const Hangman = lazy(() => import('./pages/Hangman/Hangman'))
 const Sudoku = lazy(() => import('./pages/Sudoku/Sudoku'))
@@ -47,39 +47,34 @@ function App() {
   )
 
   //Wins and Losses
-  const storedItems = JSON.parse(localStorage.getItem("result"))
-  const [result, setResult] = useState(storedItems)
+  // const storedItems = JSON.parse(localStorage.getItem("result"))
+  const [result, setResult] = useState({
+    ticWon: 0,
+    ticLost: 0,
+    hangWon: 0,
+    hangLost: 0,
+    sudoWon: 0,
+    sudoLost: 0
+  })
 
-  useEffect(() => {
-    localStorage.setItem("result", JSON.stringify({
-      ticWon: 0,
-      ticLost: 0,
-      hangWon: 0,
-      hangLost: 0,
-      sudoWon: 0,
-      sudoLost: 0
-    }))
-  }, [result])
+  // useState(() => {
+  //   localStorage.setItem("result", JSON.stringify({
+  //     ticWon: 0,
+  //     ticLost: 0,
+  //     hangWon: 0,
+  //     hangLost: 0,
+  //     sudoWon: 0,
+  //     sudoLost: 0
+  //   }))
+  // }, [result])
 
   return (
     <>
       <Routes>
-        <Route element={
-          <React.Suspense fallback={<h2>Loading...</h2>}>
-            <FreeLayout />
-          </React.Suspense>
-        }>
-          <Route path="/" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}>
-              <Login />
-            </React.Suspense>
-          } />
-        </Route >
-        <Route path="/" element={
-          <React.Suspense fallback={<h2>Loading...</h2>}>
-            <ProtectedLayout />
-          </React.Suspense>
-        }>
+        <Route element={<FreeLayout />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route path="/" element={<ProtectedLayout />}>
           <Route path="dashboard" element={
             <React.Suspense fallback={<h2>Loading...</h2>}>
               <Dashboard {...result} />
@@ -107,7 +102,7 @@ function App() {
             </React.Suspense>
           } />
         </Route>
-      </Routes >
+      </Routes>
     </>
   )
 }
