@@ -4,15 +4,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 10px
 }
 
 header {
 font-family: 'Press Start 2P', cursive;
-}
-
-nav > button {
-  margin: 5px;
-  font-size: 1.4em;
 }
 
 .header-and-nav {
@@ -21,7 +17,7 @@ nav > button {
 
 nav a.active {
   background: var(--light);
-  color: var(--accent);
+  color: var(--accent-dark);
 }
 
 nav a {
@@ -34,6 +30,7 @@ nav a {
   background-color: var(--dark);
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 5px;
 }
 nav a:hover {
   border-color: var(--accent);

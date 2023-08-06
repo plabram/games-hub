@@ -137,18 +137,25 @@ const TicTacToe = ({ result, setResult, ticData, setTicData }) => {
   return (
     <div className={ticData.visible ? "tictactoe-visible" : "tictactoe-invisible"}>
       <div className='tictactoe-game'>
-        <p>Player: {ticData.turn}</p>
-        <div className="board">
+        <p><span>Player: {ticData.turn} {ticData.turn === ticData.turn[0] ? "(Computer)" : "(You)"}</span></p>
+        <table className="board">
           {ticData.tiles.map((row, rowIndex) => (
-            <p key={rowIndex}>
+
+
+
+
+
+            <tr key={rowIndex}>
               {row.map((tile, columnIndex) => (
-                <button className="tic-button" key={columnIndex} onClick={() => clickHandler(rowIndex, columnIndex)}>
+                <td key={columnIndex}><button className="tic-button" onClick={() => clickHandler(rowIndex, columnIndex)}>
                   {tile}
-                </button>
+                </button></td>
               ))}
-            </p>
+            </tr>
+
+
           ))}
-        </div>
+        </table>
       </div>
       <StartButton init={initGame} visibility={ticData.visible} />
       {/* <button onClick={initGame}>{ticData.visible ? "Start Over" : "Start"}</button> */}

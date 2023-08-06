@@ -63,7 +63,7 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
         alert("This letter isn't in the word.")
         setHangData({
           ...hangData,
-          usedLetters: [...hangData.usedLetters, e.target.elements[0].value],
+          usedLetters: [...hangData.usedLetters, `${e.target.elements[0].value} `],
           lives: hangData.lives - 1
         })
       }

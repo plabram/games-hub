@@ -28,7 +28,7 @@ const AppBar = ({ pages }) => {
         <h1>Games Hub</h1>
       </header>
       <nav>
-        <NavLink to="/tictactoe">Tictactoe</NavLink>
+        <NavLink to="/tictactoe">Tic Tac Toe</NavLink>
         <NavLink to="/hangman">Hangman</NavLink>
         <NavLink to="/sudoku">Sudoku</NavLink>
 
