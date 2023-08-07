@@ -42,8 +42,12 @@ input {
   background-color: var(--dark);
   border: none;
   font-size: 1em;
-  color: var(--accent)
+  color: var(--light)
   
+}
+
+input::placeholder {
+  color: var(--accent)
 }
 
 input::-webkit-inner-spin-button {
