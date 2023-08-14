@@ -48,6 +48,7 @@ function App() {
 
   //Wins and Losses
   const [result, setResult] = useState(
+    JSON.parse(localStorage.getItem("result")) ||
     {
       ticWon: 0,
       ticLost: 0,
@@ -57,23 +58,9 @@ function App() {
       sudoLost: 0
     })
 
-  localStorage.setItem("result", JSON.stringify(result));
-
-  //ESTA LINEA CREA UN BUCLE INFINITO:
-  // setResult(() => JSON.parse(window.localStorage.getItem("result")))
-
-  // useState(() => {
-  // TAMBIËN HE INTENTADO PONERLA DENTRO DE UN USESTATE Y NO FUNCIONÓ :-(
-  //    setResult(() => JSON.parse(window.localStorage.getItem("result")))
-  //   localStorage.setItem("result", JSON.stringify({
-  //     ticWon: 0,
-  //     ticLost: 0,
-  //     hangWon: 0,
-  //     hangLost: 0,
-  //     sudoWon: 0,
-  //     sudoLost: 0
-  //   }))
-  // }, [result])
+  useEffect(() => {
+    localStorage.setItem("result", JSON.stringify(result));
+  }, [result]);
 
   return (
     <>
