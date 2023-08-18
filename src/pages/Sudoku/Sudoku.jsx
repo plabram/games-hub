@@ -42,6 +42,19 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
         sudoWon: result.sudoWon + 1
       })
     }
+    else if (sudoData.board.some(cell => cell === null)) {
+      if (confirm("Are you sure? You have unfinished squares, so will lose the game.")) {
+        setResult({
+          ...result,
+          sudoLost: result.sudoLost + 1
+        })
+        setSudoData({
+          ...sudoData,
+          solutionVisible: true
+        })
+      }
+    }
+
     else {
       if (confirm("That wasn't right. See solution?")) {
         setResult({
@@ -69,7 +82,7 @@ const SudokuComponent = ({ sudoData, setSudoData, result, setResult }) => {
               </button>
             ))}
         </div>
-        <button className={(!sudoData.board.some(cell => cell === null)) ? "button-visible" : "button-invisible"} onClick={clickHandler}>Check Answer</button>
+        <button onClick={clickHandler}>Check Answer</button>
 
         <div className={sudoData.solutionVisible ? "solution-visible" : "solution-invisible"}>
           {sudoData.solution.map((cell, index) => <span key={index}>{cell}</span>)}

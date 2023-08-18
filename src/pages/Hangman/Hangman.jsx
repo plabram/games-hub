@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import StartButton from '../../components/StartButton/StartButton'
 import "./Hangman.css"
 
@@ -15,7 +15,8 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
       usedLetters: [],
       randomWord: random,
       clue: randomPrettified,
-      visible: true
+      visible: true,
+      showAnswer: false
     })
   }
 
@@ -45,18 +46,15 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
       })
     }
     else {
-      if (hangData.lives == 0) {
-        alert(`Sorry! You lost. The word is ${hangData.randomWord}.`)
+      if (hangData.lives == 1) {
+        alert(`Sorry! You lost.`)
         setResult({
           ...result,
           hangLost: result.hangLost + 1
         })
         setHangData({
-          clue: "",
-          randomWord: "",
-          lives: 5,
-          usedLetters: [],
-          visible: false
+          ...hangData,
+          showAnswer: true
         })
       }
       else {
@@ -92,16 +90,15 @@ const Hangman = ({ hangData, setHangData, result, setResult }) => {
     <div className={hangData.visible ? "hangman-visible" : "hangman-invisible"}>
       <div className="hangman-game">
         <p>{(hangData.lives >= 0) ? `Lives remaining: ${hangData.lives}` : "You lose"}</p>
-        <p className="clue">{hangData.clue}</p>
+        <p className="clue">{hangData.showAnswer ? `${hangData.randomWord.split("").join(" ").trim()}` : `${hangData.clue}`}</p>
         <form onSubmit={checkLetter}>
           <label>Type a letter</label>
-          <input maxLength="1" required />
-          <button type="submit">Try</button>
+          <input disabled={hangData.showAnswer} maxLength="1" required />
+          <button disabled={hangData.showAnswer} type="submit">Try</button>
         </form>
         <p className="used-letters"><s>{hangData.usedLetters}</s></p>
       </div>
-      <StartButton init={initGame} visibility={hangData.visible} />
-      {/* <button onClick={initGame}>{hangData.visible ? "Start Over" : "Start"}</button> */}
+      <StartButton init={initGame} visibility={hangData.visible} highlight={hangData.showAnswer} />
     </div>
   )
 }

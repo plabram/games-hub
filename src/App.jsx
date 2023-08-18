@@ -32,7 +32,8 @@ function App() {
       randomWord: "",
       lives: 5,
       usedLetters: [],
-      visible: false
+      visible: false,
+      showAnswer: false
     }
   )
 

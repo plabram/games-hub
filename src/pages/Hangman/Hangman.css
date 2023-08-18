@@ -2,19 +2,9 @@
   display: none;
 }
 
-/* .hangman-invisible > button {
-  font-size: 2rem;
-  margin-top: 20px;
-} */
-
 .hangman-visible > .hangman-game {
   display: block;
 }
-
-/* .hangman-visible > button {
-  background-color: var(--dark);
-  color: var(--light)
-} */
 
 .clue {
   margin-top: 40px;
@@ -42,8 +32,20 @@ form > button {
   color: var(--dark)
 }
 
+.hangman-game input:disabled {
+  background-color: var(--dark);
+}
+
 form {
   display: grid;
   justify-content: center;
   gap: 3px
+}
+
+.highlight {
+  color: var(--accent)
+}
+
+.dont {
+  color: var(--dark)
 }

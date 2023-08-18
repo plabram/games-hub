@@ -1,4 +1,5 @@
-.sudo-invisible > .sudoku-game, .button-invisible, .solution-invisible {
+.sudo-invisible > .sudoku-game, .solution-invisible
+ {
   display: none;
 }
 
@@ -8,9 +9,9 @@
   align-items: center;
 }
 
-.button-visible {
-  display: inline;
-  margin-bottom: 10px;
+.sudoku-game > button {
+  margin-bottom: 20px; 
+  margin-top: 5px;
 }
 
 .solution-visible {
